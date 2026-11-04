@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pollería Rycko's - El Mejor Pollo a la Brasa</title>
+    
+    <!-- DESHABILITAR CACHÉ EN VERCEL Y NAVEGADORES -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <link id="page-favicon" rel="icon" href="https://i.ibb.co/6c0T7XHR/Emblema-de-Pollo-a-la-Brasa-Rycko-s.png" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+    </style>
+</head>
+<body class="bg-amber-50/50 text-gray-800 pb-24">
+
+    <!-- BARRA SUPERIOR DE ANUNCIOS -->
+    <div class="bg-amber-900 text-amber-100 text-xs py-2 px-4 text-center font-semibold tracking-wide flex justify-center items-center space-x-2">
+        <i class="fa-solid fa-fire text-yellow-400 animate-pulse"></i>
+        <span>¡Bienvenidos a Pollería Rycko's! Pide tu Pollo a la Brasa al instante.</span>
+    </div>
+
+    <!-- HEADER / NAVEGACIÓN (SIN ACCESO VISIBLE A ADMIN) -->
+    <header class="bg-amber-600 text-white shadow-xl sticky top-0 z-40 backdrop-blur-md bg-amber-600/95">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img id="nav-logo" src="https://i.ibb.co/6c0T7XHR/Emblema-de-Pollo-a-la-Brasa-Rycko-s.png" alt="Logo" class="w-11 h-11 rounded-full object-cover border-2 border-yellow-300 shadow-md bg-white">
+                <div>
+                    <h1 class="text-xl font-extrabold tracking-wider drop-shadow-sm">Pollería Rycko's</h1>
+                    <p class="text-[10px] text-amber-200 uppercase tracking-widest">Sazón y Tradición</p>
+                </div>
+            </div>
+            <div>
+                <button onclick="window.toggleCart()" class="relative bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-amber-950 font-bold px-5 py-2.5 rounded-full flex items-center space-x-2 transition shadow-lg transform hover:scale-105">
+                    <i class="fa-solid fa-cart-shopping text-lg"></i>
+                    <span>Pedido</span>
+                    <span id="cart-count" class="bg-amber-950 text-yellow-300 font-extrabold text-xs rounded-full px-2 py-0.5 shadow">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION (PORTADA DINÁMICA DE FIREBASE) -->
+    <section id="hero-section" class="relative bg-cover bg-center py-32 px-4 text-center text-white transition-all duration-500 shadow-inner">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-amber-950/80"></div>
+        <div class="relative container mx-auto max-w-3xl z-10 flex flex-col items-center">
+            <img id="hero-logo-img" src="https://i.ibb.co/6c0T7XHR/Emblema-de-Pollo-a-la-Brasa-Rycko-s.png" alt="Emblema" class="w-32 h-32 rounded-full object-cover border-4 border-yellow-400 shadow-2xl mb-6 bg-white transition duration-300">
+            <span class="bg-yellow-500 text-amber-950 text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest mb-4 shadow-md">🔥 100% Leña y Carbón</span>
+            <h2 id="hero-title" class="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg leading-tight">El Sabor Irresistible de Pollería Rycko's</h2>
+            <p id="hero-desc" class="text-lg md:text-xl text-amber-100 mb-8 drop-shadow max-w-2xl font-light">Disfruta de nuestros jugosos pollos a la brasa, papas crujientes y parrillas incomparables.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#menu" class="bg-yellow-400 hover:bg-yellow-300 text-amber-950 font-extrabold px-8 py-3.5 rounded-full shadow-2xl transition transform hover:-translate-y-1 inline-flex items-center space-x-2">
+                    <i class="fa-solid fa-utensils"></i>
+                    <span>Ver Carta Digital</span>
+                </a>
+                <a href="#ubicacion" class="bg-amber-900/80 hover:bg-amber-900 text-white font-bold px-8 py-3.5 rounded-full shadow-2xl backdrop-blur-sm transition border border-amber-600/50 inline-flex items-center space-x-2">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <span>Ubicación</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFICIOS -->
+    <section class="bg-white py-10 shadow-sm border-b border-amber-100">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <div class="p-6 rounded-2xl bg-amber-50/60 border border-amber-100 flex flex-col items-center">
+                <div class="w-12 h-12 bg-amber-600 text-white rounded-full flex items-center justify-center text-xl mb-4 shadow-md">
+                    <i class="fa-solid fa-fire-flame-curved"></i>
+                </div>
+                <h4 class="font-bold text-amber-900 text-lg mb-1">Carbón y Leña</h4>
+                <p class="text-gray-600 text-sm">Cocción tradicional que garantiza el punto jugoso perfecto.</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-amber-50/60 border border-amber-100 flex flex-col items-center">
+                <div class="w-12 h-12 bg-amber-600 text-white rounded-full flex items-center justify-center text-xl mb-4 shadow-md">
+                    <i class="fa-solid fa-motorcycle"></i>
+                </div>
+                <h4 class="font-bold text-amber-900 text-lg mb-1">Delivery Rápido</h4>
+                <p class="text-gray-600 text-sm">Llevamos tu pedido caliente y crujiente directo a tu puerta.</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-amber-50/60 border border-amber-100 flex flex-col items-center">
+                <div class="w-12 h-12 bg-amber-600 text-white rounded-full flex items-center justify-center text-xl mb-4 shadow-md">
+                    <i class="fa-solid fa-award"></i>
+                </div>
+                <h4 class="font-bold text-amber-900 text-lg mb-1">Sazón Exclusiva</h4>
+                <p class="text-gray-600 text-sm">Ingredientes selectos y cremas caseras incomparables.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENÚ DIGITAL -->
+    <main id="menu" class="container mx-auto px-4 py-12">
+        <div class="text-center mb-10">
+            <span class="text-amber-700 font-bold uppercase tracking-widest text-xs">Nuestra Carta</span>
+            <h3 class="text-3xl md:text-4xl font-extrabold text-amber-950 mt-1">Explora Nuestros Platos</h3>
+        </div>
+        
+        <div class="flex flex-wrap justify-center gap-2 mb-10">
+            <button onclick="window.filterCategory('todos')" class="cat-btn bg-amber-800 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition shadow-md">Todos</button>
+            <button onclick="window.filterCategory('pollos')" class="cat-btn bg-white text-amber-900 border border-amber-200 px-5 py-2.5 rounded-full text-sm font-semibold transition shadow-sm">Pollos</button>
+            <button onclick="window.filterCategory('combos')" class="cat-btn bg-white text-amber-900 border border-amber-200 px-5 py-2.5 rounded-full text-sm font-semibold transition shadow-sm">Combos</button>
+            <button onclick="window.filterCategory('parrillas')" class="cat-btn bg-white text-amber-900 border border-amber-200 px-5 py-2.5 rounded-full text-sm font-semibold transition shadow-sm">Parrillas</button>
+            <button onclick="window.filterCategory('bebidas')" class="cat-btn bg-white text-amber-900 border border-amber-200 px-5 py-2.5 rounded-full text-sm font-semibold transition shadow-sm">Bebidas</button>
+            <button onclick="window.filterCategory('adicionales')" class="cat-btn bg-white text-amber-900 border border-amber-200 px-5 py-2.5 rounded-full text-sm font-semibold transition shadow-sm">Adicionales</button>
+        </div>
+
+        <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <p class="col-span-full text-center text-gray-500 py-12"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Conectando con Firebase Firestore...</p>
+        </div>
+    </main>
+
+    <!-- UBICACIÓN Y CONTACTO -->
+    <section id="ubicacion" class="bg-amber-100/70 py-16 px-4 border-t border-amber-200/60 mt-12">
+        <div class="container mx-auto max-w-5xl bg-white rounded-3xl shadow-xl p-8 md:p-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center border border-amber-100">
+            <div>
+                <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider inline-block mb-3">Encuéntranos</span>
+                <h3 class="text-3xl font-extrabold text-amber-950 mb-6">Visítanos o Pide Delivery</h3>
+                
+                <div class="space-y-5 text-sm text-gray-700">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-amber-950 text-base">Dirección del Local:</p>
+                            <p id="info-address" class="text-gray-600">Cargando dirección...</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-amber-950 text-base">Horario de Atención:</p>
+                            <p id="info-hours" class="text-gray-600">Cargando horario...</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-amber-950 text-base">Teléfono / WhatsApp:</p>
+                            <p id="info-whatsapp" class="text-gray-600 font-mono font-semibold">968665080</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <a id="info-map-btn" href="#" target="_blank" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-7 py-3 rounded-2xl text-sm transition inline-flex items-center space-x-2 shadow-lg">
+                        <i class="fa-solid fa-map-marked-alt text-lg"></i>
+                        <span>Abrir Ubicación en Google Maps</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="rounded-2xl overflow-hidden shadow-lg h-72 border-2 border-amber-100">
+                <img id="info-map-img" src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=600&q=80" alt="Ubicación" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </section>
+
+    <!-- BOTÓN FLOTANTE WHATSAPP -->
+    <button onclick="window.toggleCart()" class="fixed bottom-6 right-6 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white p-4 px-6 rounded-full shadow-2xl z-40 flex items-center space-x-3 transition transform hover:scale-105 border-2 border-white/30">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+        <div class="text-left leading-tight hidden sm:block">
+            <span class="block text-[10px] uppercase font-bold tracking-wider text-green-200">Hacer Pedido</span>
+            <span class="font-extrabold text-sm">Ver Carrito</span>
+        </div>
+        <span id="floating-cart-count" class="bg-yellow-400 text-amber-950 text-xs font-extrabold rounded-full w-6 h-6 flex items-center justify-center shadow-md">0</span>
+    </button>
+
+    <!-- CARRITO MODAL -->
+    <div id="cart-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50 flex justify-end">
+        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col p-6 overflow-y-auto">
+            <div class="flex justify-between items-center border-b pb-4 mb-4">
+                <h3 class="text-xl font-extrabold text-amber-950 flex items-center"><i class="fa-solid fa-basket-shopping mr-2 text-amber-600"></i>Tu Pedido Directo</h3>
+                <button onclick="window.toggleCart()" class="text-gray-400 hover:text-gray-700 text-2xl w-8 h-8 rounded-full flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <div id="cart-items" class="flex-1 space-y-3 overflow-y-auto mb-4">
+                <p class="text-gray-400 text-center py-12 text-sm">Tu carrito está vacío.</p>
+            </div>
+
+            <div class="border-t pt-4 space-y-4 bg-gray-50/50 p-4 rounded-2xl border border-gray-100">
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Nombre Completo:</label>
+                    <input type="text" id="order-name" placeholder="Tu nombre..." class="w-full text-sm border border-gray-200 rounded-xl p-2.5 focus:outline-amber-600 bg-white">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Tipo de Entrega:</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <label class="flex items-center space-x-2 text-sm bg-white p-2.5 rounded-xl border border-gray-200 cursor-pointer font-medium">
+                            <input type="radio" name="order-type" value="Delivery" checked onchange="window.toggleAddressField(true)"> Delivery
+                        </label>
+                        <label class="flex items-center space-x-2 text-sm bg-white p-2.5 rounded-xl border border-gray-200 cursor-pointer font-medium">
+                            <input type="radio" name="order-type" value="Recojo en Local" onchange="window.toggleAddressField(false)"> Recojo
+                        </label>
+                    </div>
+                </div>
+                <div id="address-container">
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Dirección de Envío:</label>
+                    <input type="text" id="order-address" placeholder="Calle, número, referencia..." class="w-full text-sm border border-gray-200 rounded-xl p-2.5 focus:outline-amber-600 bg-white">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Notas:</label>
+                    <input type="text" id="order-notes" placeholder="Ej. Papas crujientes, crema extra..." class="w-full text-sm border border-gray-200 rounded-xl p-2.5 focus:outline-amber-600 bg-white">
+                </div>
+                <div class="flex justify-between font-extrabold text-xl pt-2 border-t border-gray-200">
+                    <span class="text-gray-700">Total:</span>
+                    <span id="cart-total" class="text-amber-700">S/. 0.00</span>
+                </div>
+                <button onclick="window.checkoutWhatsApp()" class="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-extrabold py-4 rounded-2xl flex items-center justify-center space-x-2 transition shadow-xl text-base">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i> 
+                    <span>Enviar Pedido a WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-amber-950 text-amber-200 py-12 text-center border-t-4 border-amber-600">
+        <div class="container mx-auto px-4 flex flex-col items-center">
+            <div class="flex items-center space-x-3 mb-4">
+                <img id="footer-logo" src="https://i.ibb.co/6c0T7XHR/Emblema-de-Pollo-a-la-Brasa-Rycko-s.png" alt="Logo" class="w-12 h-12 rounded-full object-cover border-2 border-yellow-400 shadow-md bg-white">
+                <p class="font-extrabold text-xl text-white tracking-wider">Pollería Rycko's</p>
+            </div>
+            <p class="text-sm">Delivery y Pedidos al WhatsApp: <span id="footer-whatsapp" class="font-extrabold text-yellow-400 font-mono text-base">968665080</span></p>
+        </div>
+    </footer>
+
+    <!-- SDK DE FIREBASE Y LOGICA DE NAVEGADOR -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAMAVmKSb8Tygvd3NycZMrBj86GN9h4-j4",
+            authDomain: "registro-personas-c5e48.firebaseapp.com",
+            projectId: "registro-personas-c5e48",
+            storageBucket: "registro-personas-c5e48.firebasestorage.app",
+            messagingSenderId: "129443873783",
+            appId: "1:129443873783:web:9d4575e9ea54ba208e24f2"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let products = [];
+        let cart = [];
+        let currentFilter = 'todos';
+        let currentWhatsapp = '968665080';
+
+        // Escuchar datos del Menú desde Firestore
+        onSnapshot(collection(db, "products"), (snapshot) => {
+            products = [];
+            snapshot.forEach(docSnap => {
+                products.push({ id: docSnap.id, ...docSnap.data() });
+            });
+            renderProducts();
+        });
+
+        // Escuchar Configuración General desde Firestore
+        onSnapshot(doc(db, "config", "general"), (docSnap) => {
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                if(data.title) document.getElementById('hero-title').textContent = data.title;
+                if(data.desc) document.getElementById('hero-desc').textContent = data.desc;
+                if(data.heroImg) document.getElementById('hero-section').style.backgroundImage = `url('${data.heroImg}')`;
+                
+                const logo = data.logo || "https://i.ibb.co/6c0T7XHR/Emblema-de-Pollo-a-la-Brasa-Rycko-s.png";
+                document.getElementById('nav-logo').src = logo;
+                document.getElementById('hero-logo-img').src = logo;
+                document.getElementById('footer-logo').src = logo;
+                document.getElementById('page-favicon').href = logo;
+
+                if(data.address) document.getElementById('info-address').textContent = data.address;
+                if(data.hours) document.getElementById('info-hours').textContent = data.hours;
+                if(data.whatsapp) {
+                    currentWhatsapp = data.whatsapp;
+                    document.getElementById('info-whatsapp').textContent = data.whatsapp;
+                    document.getElementById('footer-whatsapp').textContent = data.whatsapp;
+                }
+                if(data.mapUrl) document.getElementById('info-map-btn').href = data.mapUrl;
+                if(data.mapImg) document.getElementById('info-map-img').src = data.mapImg;
+            }
+        });
+
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+            const filtered = currentFilter === 'todos' ? products : products.filter(p => p.category === currentFilter);
+            
+            if(filtered.length === 0) {
+                grid.innerHTML = '<p class="col-span-full text-center text-gray-400 py-12">No hay platos disponibles por el momento.</p>';
+                return;
+            }
+
+            filtered.forEach(p => {
+                grid.innerHTML += `
+                    <div class="bg-white rounded-3xl shadow-md hover:shadow-2xl overflow-hidden flex flex-col justify-between border border-amber-100/80 transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="relative overflow-hidden h-52">
+                            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover transform hover:scale-110 transition duration-500">
+                            <span class="absolute top-3 left-3 bg-amber-600 text-white text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full shadow-md">${p.category}</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-extrabold text-xl text-amber-950 mb-2">${p.name}</h4>
+                                <p class="text-gray-600 text-sm mb-4 line-clamp-2 font-light">${p.desc}</p>
+                            </div>
+                            <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+                                <div>
+                                    <span class="text-xs text-gray-400 block font-medium">Precio</span>
+                                    <span class="text-2xl font-extrabold text-amber-800">S/. ${Number(p.price).toFixed(2)}</span>
+                                </div>
+                                <button onclick="window.addToCart('${p.name}', ${p.price})" class="bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-amber-950 font-extrabold px-5 py-2.5 rounded-xl text-sm transition shadow-md hover:shadow-lg flex items-center space-x-1.5">
+                                    <i class="fa-solid fa-plus"></i>
+                                    <span>Agregar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        window.filterCategory = function(cat) {
+            currentFilter = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('bg-amber-800', 'text-white', 'shadow-md');
+                btn.classList.add('bg-white', 'text-amber-900', 'shadow-sm');
+            });
+            event.target.classList.remove('bg-white', 'text-amber-900', 'shadow-sm');
+            event.target.classList.add('bg-amber-800', 'text-white', 'shadow-md');
+            renderProducts();
+        };
+
+        window.toggleCart = function() { document.getElementById('cart-modal').classList.toggle('hidden'); };
+        window.toggleAddressField = function(show) { document.getElementById('address-container').classList.toggle('hidden', !show); };
+
+        window.addToCart = function(name, price) {
+            const existing = cart.find(item => item.name === name);
+            if (existing) existing.quantity += 1;
+            else cart.push({ name, price: Number(price), quantity: 1 });
+            updateCartUI();
+        };
+
+        function updateCartUI() {
+            const countEl = document.getElementById('cart-count');
+            const floatingCountEl = document.getElementById('floating-cart-count');
+            const itemsEl = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total');
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            countEl.textContent = totalCount;
+            floatingCountEl.textContent = totalCount;
+
+            if (cart.length === 0) {
+                itemsEl.innerHTML = '<p class="text-gray-400 text-center py-12 text-sm">Tu carrito está vacío.</p>';
+                totalEl.textContent = 'S/. 0.00';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price * item.quantity;
+                html += `
+                    <div class="flex justify-between items-center bg-amber-50/70 p-3.5 rounded-2xl border border-amber-100">
+                        <div>
+                            <h5 class="font-extrabold text-amber-950 text-sm">${item.name}</h5>
+                            <p class="text-xs text-gray-500 font-medium">S/. ${item.price.toFixed(2)} x ${item.quantity}</p>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <span class="font-extrabold text-amber-800 text-sm">S/. ${(item.price * item.quantity).toFixed(2)}</span>
+                            <button onclick="window.removeFromCart(${index})" class="text-red-400 hover:text-red-600 text-xs w-7 h-7 rounded-full bg-white shadow-sm flex items-center justify-center transition"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
+            });
+            itemsEl.innerHTML = html;
+            totalEl.textContent = `S/. ${total.toFixed(2)}`;
+        }
+
+        window.removeFromCart = function(index) { cart.splice(index, 1); updateCartUI(); };
+
+        window.checkoutWhatsApp = function() {
+            if (cart.length === 0) { alert('Agrega al menos un producto.'); return; }
+            const name = document.getElementById('order-name').value.trim();
+            const type = document.querySelector('input[name="order-type"]:checked').value;
+            const address = document.getElementById('order-address').value.trim();
+            const notes = document.getElementById('order-notes').value.trim();
+
+            let msg = `*NUEVO PEDIDO - POLLERÍA RYCKO'S*\n`;
+            if (name) msg += `*Cliente:* ${name}\n`;
+            msg += `*Entrega:* ${type}\n`;
+            if (type === 'Delivery' && address) msg += `*Dirección:* ${address}\n`;
+            msg += `\n*Detalle del Pedido:*\n`;
+
+            let total = 0;
+            cart.forEach(item => {
+                msg += `• ${item.quantity}x ${item.name} (S/. ${(item.price * item.quantity).toFixed(2)})\n`;
+                total += item.price * item.quantity;
+            });
+            msg += `\n*Total a Pagar:* S/. ${total.toFixed(2)}`;
+            if (notes) msg += `\n*Notas:* ${notes}`;
+
+            let phone = currentWhatsapp.replace(/\D/g, '');
+            if (!phone.startsWith('51') && phone.length === 9) phone = '51' + phone;
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+        };
+    </script>
+</body>
+</html>

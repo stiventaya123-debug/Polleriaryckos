@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin - Pollería Rycko's</title>
+
+    <!-- DESHABILITAR CACHÉ EN VERCEL -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+    <!-- HEADER ADMIN -->
+    <header class="bg-amber-900 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-cloud-bolt text-yellow-400 text-xl"></i>
+                <h1 class="text-xl font-bold">Panel Admin Firebase - Pollería Rycko's</h1>
+            </div>
+            <a href="index.html" class="bg-amber-800 hover:bg-amber-700 px-4 py-2 rounded text-sm transition"><i class="fa-solid fa-store mr-1"></i>Ver Página Principal</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 max-w-4xl space-y-8">
+        
+        <!-- CONFIGURACIÓN DE PORTADA Y LOGO -->
+        <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-amber-600">
+            <h2 class="text-xl font-bold text-amber-900 mb-2"><i class="fa-solid fa-image mr-2"></i>Configurar Portada y Logotipo (Firebase)</h2>
+            <form id="hero-form" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">URL del Logotipo Oficial</label>
+                    <input type="url" id="hero-logo" required class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-amber-600">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">URL de Imagen de Fondo (Portada)</label>
+                    <input type="url" id="hero-img" required class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-amber-600">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Título Principal</label>
+                        <input type="text" id="hero-title" required class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-amber-600">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Descripción de Portada</label>
+                        <input type="text" id="hero-desc" required class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-amber-600">
+                    </div>
+                </div>
+                <button type="submit" class="bg-amber-700 hover:bg-amber-800 text-white font-bold px-6 py-2 rounded-lg text-sm transition">Guardar en la Nube</button>
+            </form>
+        </div>
+
+        <!-- CONFIGURACIÓN DE UBICACIÓN Y WHATSAPP -->
+        <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-amber-800">
+            <h2 class="text-xl font-bold text-amber-900 mb-2"><i class="fa-solid fa-address-book mr-2"></i>Configurar Ubicación y WhatsApp</h2>
+            <form id="location-form" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">WhatsApp</label>
+                        <input type="text" id="loc-whatsapp" required class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-amber-600">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Dirección del Local</label>
+                        <input type="text" id="loc-address" required class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-amber-600">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Horario</label>
+                        <input type="text" id="loc-hours" required class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-amber-600">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Enlace de Google Maps (URL)</label>
+                        <input type="url" id="loc-mapurl" required class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-amber-600">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">URL de Imagen del Local / Mapa</label>
+                        <input type="url" id="loc-mapimg" required class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-amber-600">
+                    </div>
+                </div>
+                <button type="submit" class="bg-amber-800 hover:bg-amber-900 text-white font-bold px-6 py-2 rounded-lg text-sm transition">Guardar Contacto</button>
+            </form>
+        </div>
+
+        <!-- GESTIÓN DE PLATOS -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 id="form-title" class="text-xl font-bold text-amber-900"><i class="fa-solid fa-plus-circle mr-2"></i>Agregar Nuevo Plato</h2>
+            </div>
+            
+            <form id="product-form" class="space-y-4">
+                <input type="hidden" id="p-id">
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Nombre del Plato</label>
+                    <input type="text" id="p-name" required class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-amber-600">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Categoría</label>
+                        <select id="p-category" required class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-amber-600">
+                            <option value="pollos">Pollos a la Brasa</option>
+                            <option value="combos">Combos</option>
+                            <option value="parrillas">Parrillas</option>
+                            <option value="bebidas">Bebidas</option>
+                            <option value="adicionales">Adicionales</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Precio (S/.)</label>
+                        <input type="number" step="0.10" id="p-price" required class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-amber-600">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">URL de Imagen</label>
+                        <input type="url" id="p-img" required class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-amber-600">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Descripción corta</label>
+                    <textarea id="p-desc" rows="2" required class="w-full border rounded-lg px-4 py-2 text-sm focus:outline-amber-600"></textarea>
+                </div>
+                <div class="flex space-x-2">
+                    <button type="submit" class="bg-amber-700 hover:bg-amber-800 text-white font-bold px-6 py-2 rounded-lg text-sm transition">Guardar Plato en Firebase</button>
+                    <button type="button" onclick="window.cancelEdit()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold px-6 py-2 rounded-lg text-sm transition">Cancelar</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- TABLA DE PLATOS -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <h3 class="text-xl font-bold text-amber-900 mb-4"><i class="fa-solid fa-list mr-2"></i>Platos Registrados en Firestore</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-amber-50 text-amber-900 border-b text-xs uppercase">
+                            <th class="p-3">Plato</th>
+                            <th class="p-3">Categoría</th>
+                            <th class="p-3">Precio</th>
+                            <th class="p-3 text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-product-list" class="divide-y text-sm"></tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SDK DE FIREBASE Y LOGICA ADMIN -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, setDoc, onSnapshot, collection, addDoc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAMAVmKSb8Tygvd3NycZMrBj86GN9h4-j4",
+            authDomain: "registro-personas-c5e48.firebaseapp.com",
+            projectId: "registro-personas-c5e48",
+            storageBucket: "registro-personas-c5e48.firebasestorage.app",
+            messagingSenderId: "129443873783",
+            appId: "1:129443873783:web:9d4575e9ea54ba208e24f2"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let products = [];
+
+        // Cargar Configuración Actual
+        onSnapshot(doc(db, "config", "general"), (docSnap) => {
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                document.getElementById('hero-logo').value = data.logo || "https://i.ibb.co/6c0T7XHR/Emblema-de-Pollo-a-la-Brasa-Rycko-s.png";
+                document.getElementById('hero-img').value = data.heroImg || "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=1200&q=80";
+                document.getElementById('hero-title').value = data.title || "El Sabor Irresistible de Pollería Rycko's";
+                document.getElementById('hero-desc').value = data.desc || "Disfruta de nuestros jugosos pollos, parrillas y combos familiares.";
+
+                document.getElementById('loc-whatsapp').value = data.whatsapp || "968665080";
+                document.getElementById('loc-address').value = data.address || "Av. Principal 123";
+                document.getElementById('loc-hours').value = data.hours || "Lun - Dom: 12m - 11pm";
+                document.getElementById('loc-mapurl').value = data.mapUrl || "https://maps.google.com";
+                document.getElementById('loc-mapimg').value = data.mapImg || "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=600&q=80";
+            }
+        });
+
+        // Guardar Portada/Logo en Firebase
+        document.getElementById('hero-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await setDoc(doc(db, "config", "general"), {
+                logo: document.getElementById('hero-logo').value.trim(),
+                heroImg: document.getElementById('hero-img').value.trim(),
+                title: document.getElementById('hero-title').value.trim(),
+                desc: document.getElementById('hero-desc').value.trim()
+            }, { merge: true });
+            alert("¡Portada y Logo actualizados en la nube!");
+        });
+
+        // Guardar Ubicación/WhatsApp en Firebase
+        document.getElementById('location-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await setDoc(doc(db, "config", "general"), {
+                whatsapp: document.getElementById('loc-whatsapp').value.trim(),
+                address: document.getElementById('loc-address').value.trim(),
+                hours: document.getElementById('loc-hours').value.trim(),
+                mapUrl: document.getElementById('loc-mapurl').value.trim(),
+                mapImg: document.getElementById('loc-mapimg').value.trim()
+            }, { merge: true });
+            alert("¡Ubicación y WhatsApp actualizados en la nube!");
+        });
+
+        // Cargar Platos desde Firestore
+        onSnapshot(collection(db, "products"), (snapshot) => {
+            products = [];
+            snapshot.forEach(docSnap => {
+                products.push({ id: docSnap.id, ...docSnap.data() });
+            });
+            renderAdminTable();
+        });
+
+        function renderAdminTable() {
+            const tbody = document.getElementById('admin-product-list');
+            tbody.innerHTML = '';
+            products.forEach(p => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="p-3 flex items-center space-x-3">
+                            <img src="${p.img}" class="w-10 h-10 rounded-lg object-cover">
+                            <div>
+                                <p class="font-bold text-amber-900">${p.name}</p>
+                                <p class="text-xs text-gray-500 truncate max-w-xs">${p.desc}</p>
+                            </div>
+                        </td>
+                        <td class="p-3 capitalize text-gray-600">${p.category}</td>
+                        <td class="p-3 font-semibold text-amber-700">S/. ${Number(p.price).toFixed(2)}</td>
+                        <td class="p-3 text-center space-x-2">
+                            <button onclick="window.editProduct('${p.id}')" class="bg-amber-600 hover:bg-amber-700 text-white px-3 py-1 rounded text-xs transition"><i class="fa-solid fa-pen"></i></button>
+                            <button onclick="window.deleteProduct('${p.id}')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs transition"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        // Guardar o Editar Plato en Firestore
+        document.getElementById('product-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('p-id').value;
+            const productData = {
+                name: document.getElementById('p-name').value.trim(),
+                category: document.getElementById('p-category').value,
+                price: parseFloat(document.getElementById('p-price').value),
+                img: document.getElementById('p-img').value.trim(),
+                desc: document.getElementById('p-desc').value.trim()
+            };
+
+            if (id) {
+                await updateDoc(doc(db, "products", id), productData);
+            } else {
+                await addDoc(collection(db, "products"), productData);
+            }
+
+            window.cancelEdit();
+            alert("¡Plato guardado con éxito!");
+        });
+
+        window.editProduct = function(id) {
+            const p = products.find(item => item.id === id);
+            if(!p) return;
+            document.getElementById('p-id').value = p.id;
+            document.getElementById('p-name').value = p.name;
+            document.getElementById('p-category').value = p.category;
+            document.getElementById('p-price').value = p.price;
+            document.getElementById('p-img').value = p.img;
+            document.getElementById('p-desc').value = p.desc;
+            document.getElementById('form-title').innerHTML = `<i class="fa-solid fa-pen-to-square mr-2"></i>Editar: ${p.name}`;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        window.deleteProduct = async function(id) {
+            if(confirm('¿Deseas eliminar este plato?')) {
+                await deleteDoc(doc(db, "products", id));
+            }
+        };
+
+        window.cancelEdit = function() {
+            document.getElementById('product-form').reset();
+            document.getElementById('p-id').value = '';
+            document.getElementById('form-title').innerHTML = `<i class="fa-solid fa-plus-circle mr-2"></i>Agregar Nuevo Plato`;
+        };
+    </script>
+</body>
+</html>
